@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" type="text/css" href="./styles/index.css">
+	<link href="https://fonts.googleapis.com/css?family=Nunito|Open+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+	<link rel="shortcut icon" href="./favicon.ico">
+	<title>Vape calc</title>
+</head>
+
+<body>
+	<div class="container">
+		<h5>E-liquid calculator</h5>
+		<form class="inputs">
+			<div class="input-group">
+				<label for="recipe-name" class="fieldname">Recipe name</label>
+				<input type="text" class="input" id="recipe-name" value="New awesome mix" required>
+			</div>
+			<div class="input-group">
+				<label for="amount" class="fieldname">Total amount (ml)</label>
+				<input type="number" class="input" id="amount" value="30" min="0" required>
+				<label for="amount" class="tip">Enter the desired amount of liquid in ml.</label>
+			</div>
+			<h5 class="header">PG/VG ratio</h5>
+			<p class="tip">Adjust the slider to the preferred final PG / VG ratio for your recipe.</p>
+			<div class="slider-group">
+				<input type="range" class="slider pgvgratio" min="0" max="100" value="50" step="5" list="tickmarks">
+				<datalist id="tickmarks">
+					<option value="0">
+					<option value="30">
+					<option value="50">
+					<option value="70">
+					<option value="100">
+				</datalist>
+				<div class="selected-value">
+					<span class="pg-value"></span>
+					<span class="vg-value"></span>
+				</div>
+			</div>
+			
+			<div class="additives">
+				<div class="closed-group">
+					<div class="group-header inactive">
+						<i class="material-icons">add_circle_outline</i>
+						<p>Diluent</p>
+					</div>
+				</div>
+				<div class="closed-group">
+					<div class="group-header inactive nicotine">
+						<i class="material-icons">add_circle_outline</i>
+						<p>Nicotine</p>
+					</div>
+					<div class="opened-group">
+						<p class="tip">If you want to add nicotine, set up the details of the nicotine base that you have.</p>
+						<h5 class="header">Base PG/VG ratio</h5>
+						<div class="slider-group">
+							<input type="range" class="slider pgvgratio" min="0" max="100" value="50" step="5" list="tickmarks">
+							<datalist id="tickmarks">
+								<option value="0">
+								<option value="30">
+								<option value="50">
+								<option value="70">
+								<option value="100">
+							</datalist>
+							<div class="selected-value">
+								<span class="pg-value"></span>
+								<span class="vg-value"></span>
+							</div>
+						</div>
+						
+						<div class="input-group">
+							<label for="base-strenght" class="fieldname">Base strenght (mg)</label>
+							<input type="number" class="input" id="base-strenght" value="3" min="0" required>
+							<p class="tip">Enter the nicotine base strenght in mg.</p>
+						</div>
+						<div class="input-group">
+							<label for="nicotine-output" class="fieldname">Desired nicotine strenght</label>
+							<input type="number" class="input" id="nicotine-output" value="3" min="0" required>
+							<p class="tip">Specify the strength of the liquid you want to make.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="flavours">
+				<div class="unit-switch">
+					<span id="percents-tab" class="tab"><p>%</p></span>
+					<span id="ml-tab" class="tab selected"><p>ml</p></span>
+				</div>
+				<div class="flavours-list">
+					<div class="flavour-field">
+						<i class="material-icons remove-flavour">remove_circle_outline</i>
+						<input type="text" class="input flavour-name" placeholder="Flavour #1">
+						<input type="number" class="input flavour-amount ml" value="0" min="0" max="100">
+					</div>
+					<div class="add-flavour">
+						<i class="material-icons">add_circle_outline</i>
+						<p>Add flavour</p>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<input type="button" value="Show recipe" class="btn-submit" href="#result">
+			</div>
+		</form>
+		
+		<div class="result">
+			<div class="recipe-name">Default Name</div>
+			<span class="output-amount">100 ml</span>
+			<strong>|</strong>
+			<span class="output-nicotine">3 mg</span>
+			<div class="btn-container">
+				<input type="button" value="Save recipe" class="btn-save-recipe">
+				<input type="button" value="Share" class="btn-share">
+			</div>
+			<div class="result-grid-table">
+				<div class="grid-item grid-row-name"></div>
+				<div class="grid-item grid-amount-percents">%</div>
+				<div class="grid-item">ml</div>
+				<div class="grid-item grid-row-name">PG</div>
+				<div class="grid-item grid-amount-percents" id="pg-res-percents">28</div>
+				<div class="grid-item">28</div>
+				<div class="grid-item grid-row-name">VG</div>
+				<div class="grid-item grid-amount-percents" id="vg-res-percents">75</div>
+				<div class="grid-item">75</div>
+				<div class="grid-item grid-row-name">Nicotine</div>
+				<div class="grid-item grid-amount-percents">13</div>
+				<div class="grid-item">13</div>
+				<div class="grid-item grid-row-name">Flavour</div>
+				<div class="grid-item grid-amount-percents">0.5</div>
+				<div class="grid-item">0.5</div>
+			</div>
+		</div>
+	</div>
+<script src="./scripts/index.js"></script>
+</body>
+</html>
