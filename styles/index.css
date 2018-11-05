@@ -12,6 +12,7 @@ p {
 
 input[type="button"] {
 	height: 3.11em;
+	border: none;
 }
 
 .container {
@@ -35,6 +36,7 @@ input[type="button"] {
 }
 
 .tip {
+	position: relative;
 	margin: auto;
 	margin-top: .5em;
 	padding: .5em 1em;
@@ -44,6 +46,7 @@ input[type="button"] {
 }
 
 .input-group {
+	display: block;
 	justify-content: center;
 	margin: 0 0 .89em 0;
 }
@@ -53,6 +56,15 @@ input[type="button"] {
 	color: #828282;
 	font-size: .67em;
 	font-weight: 800;
+	position: relative;
+	top: -2.5em;
+	transition: all 0.5s ease; 
+  	-moz-transition: all 0.5s ease; 
+  	-webkit-transition: all 0.5s ease;
+}
+
+.filled + label.fieldname, .input:focus + label.fieldname {
+	top: -4.5em;
 }
 
 .input {
@@ -60,6 +72,7 @@ input[type="button"] {
 	width: 100%;
 	margin: 0;
 	padding: 0 0 .61em .89em;
+	background: transparent;
 	border: none;
 	border-bottom: 2px solid #828282;
 }
@@ -80,6 +93,7 @@ input[type="button"] {
 	padding: 0;
 	height: auto;
 	opacity: 0.7;
+	color: #000000;
 }
 
 .slider:hover {
@@ -189,10 +203,6 @@ input[type="button"] {
 	flex-basis: 4.06em;
 }
 
-.flavour-amount:focus {
-	background: #FFFFFF;
-}
-
 .add-flavour {
 	display: flex;
 	align-items: center;
@@ -239,7 +249,7 @@ input[type="button"] {
 .btn-share {
 	width: 8.83em;
 	background: transparent;
-	border: .17em solid #000000;
+	border: .17em solid #000000 !important;
 	padding: 0;
 	margin-left: -.3em;
 }

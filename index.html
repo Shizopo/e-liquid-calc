@@ -16,12 +16,12 @@
 		<h5>E-liquid calculator</h5>
 		<form class="inputs">
 			<div class="input-group">
+				<input type="text" class="input" id="recipe-name" required>
 				<label for="recipe-name" class="fieldname">Recipe name</label>
-				<input type="text" class="input" id="recipe-name" value="New awesome mix" required>
 			</div>
 			<div class="input-group">
+				<input type="number" class="input" id="amount" min="0" required>
 				<label for="amount" class="fieldname">Total amount (ml)</label>
-				<input type="number" class="input" id="amount" value="30" min="0" required>
 				<label for="amount" class="tip">Enter the desired amount of liquid in ml.</label>
 			</div>
 			<h5 class="header">PG/VG ratio</h5>
@@ -72,13 +72,13 @@
 						</div>
 						
 						<div class="input-group">
+							<input type="number" class="input" id="base-strenght" min="0" required>
 							<label for="base-strenght" class="fieldname">Base strenght (mg)</label>
-							<input type="number" class="input" id="base-strenght" value="3" min="0" required>
 							<p class="tip">Enter the nicotine base strenght in mg.</p>
 						</div>
 						<div class="input-group">
+							<input type="number" class="input" id="nicotine-output" min="0" required>
 							<label for="nicotine-output" class="fieldname">Desired nicotine strenght</label>
-							<input type="number" class="input" id="nicotine-output" value="3" min="0" required>
 							<p class="tip">Specify the strength of the liquid you want to make.</p>
 						</div>
 					</div>

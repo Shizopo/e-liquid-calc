@@ -4,6 +4,7 @@ let vg = document.getElementsByClassName("vg-value");
 const nicotineGroup = document.getElementsByClassName("nicotine")[0];
 let addFlavourBtn = document.querySelector(".add-flavour");
 let rmFlavourBtn = document.getElementsByClassName("remove-flavour");
+let inputs = document.getElementsByClassName("input");
 let flavourCounter = 1;
 let isOpened = false;
 
@@ -12,6 +13,9 @@ window.addEventListener("DOMContentLoaded", () => {
         pg[i].innerHTML = "50% PG";
         vg[i].innerHTML = "50% VG";
         slider[i].addEventListener("input", sliderVal);
+    }
+    for (let j = 0; j < inputs.length; j++) {
+        inputs[j].addEventListener("focusout", fillCheck);
     }
     nicotineGroup.addEventListener("click", toggleGroup);
     addFlavourBtn.addEventListener("click", addFlavour);
@@ -23,6 +27,16 @@ function sliderVal() {
     vg = this.parentNode.querySelector(".vg-value");
     pg.innerHTML = ((100 - currentPosition) + "% PG");
     vg.innerHTML = (currentPosition + "% VG");
+}
+
+function fillCheck() {
+    let target = this;
+    console.log(target);
+    if (target.value.trim() == '') {
+        target.classList.remove("filled");
+    } else {
+        target.classList.add("filled");
+    }
 }
 
 function toggleGroup() {
