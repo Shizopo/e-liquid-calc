@@ -2,11 +2,13 @@ let slider = document.getElementsByClassName("slider");
 let pg = document.getElementsByClassName("pg-value");
 let vg = document.getElementsByClassName("vg-value");
 const nicotineGroup = document.getElementsByClassName("nicotine")[0];
+const diluentGroup = document.getElementsByClassName("diluent")[0];
+let inputs = document.getElementsByClassName("input");
 let addFlavourBtn = document.querySelector(".add-flavour");
 let rmFlavourBtn = document.getElementsByClassName("remove-flavour");
-let inputs = document.getElementsByClassName("input");
+let percentsTab = document.querySelector("#percents-tab");
+let mlTab = document.querySelector("#ml-tab");
 let flavourCounter = 1;
-let isOpened = false;
 
 window.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < slider.length; i++) {
@@ -17,7 +19,9 @@ window.addEventListener("DOMContentLoaded", () => {
     for (let j = 0; j < inputs.length; j++) {
         inputs[j].addEventListener("focusout", fillCheck);
     }
-    nicotineGroup.addEventListener("click", toggleGroup);
+    nicotineGroup.addEventListener("click", openGroup);
+    diluentGroup.addEventListener("click", openGroup);
+    percentsTab.addEventListener("click", changeUnits);
     addFlavourBtn.addEventListener("click", addFlavour);
 });
 
@@ -39,27 +43,27 @@ function fillCheck() {
     }
 }
 
-function toggleGroup() {
+function openGroup() {
     let toggleIcon = this.childNodes[1];
     let displayedItem = this.nextElementSibling;
-    if(!isOpened) {
-        isOpened = true;
-        toggleIcon.parentNode.classList.remove("inactive");
-        toggleIcon.parentNode.classList.add("active");
-        toggleIcon.innerHTML = "remove_circle_outline";
-        displayedItem.style.display = "flex";
-    } else {
-        isOpened = false;
-        toggleIcon.parentNode.classList.remove("active");
-        toggleIcon.parentNode.classList.add("inactive");
-        toggleIcon.innerHTML = "add_circle_outline";
-        displayedItem.style.display = "none";
-    }
+    toggleIcon.parentNode.classList.remove("inactive");
+    toggleIcon.parentNode.classList.add("active");
+    toggleIcon.innerHTML = "remove_circle_outline";
+    displayedItem.style.display = "flex";
+    this.removeEventListener("click", openGroup);
+    this.addEventListener("click", closeGroup);
 }
 
-let percentsTab = document.querySelector("#percents-tab");
-let mlTab = document.querySelector("#ml-tab");
-percentsTab.addEventListener("click", changeUnits);
+function closeGroup() {
+    let toggleIcon = this.childNodes[1];
+    let displayedItem = this.nextElementSibling;
+    toggleIcon.parentNode.classList.remove("active");
+    toggleIcon.parentNode.classList.add("inactive");
+    toggleIcon.innerHTML = "add_circle_outline";
+    displayedItem.style.display = "none";
+    this.removeEventListener("click", closeGroup);
+    this.addEventListener("click", openGroup);
+}
 
 function changeUnits() {
     changeTabStyle(this);
