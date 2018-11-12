@@ -20,9 +20,9 @@
 				<label for="recipe-name" class="fieldname">Recipe name</label>
 			</div>
 			<div class="input-group">
-				<input type="number" class="input" id="amount" min="0" required>
-				<label for="amount" class="fieldname">Total amount (ml)</label>
-				<label for="amount" class="tip">Enter the desired amount of liquid in ml.</label>
+				<input type="number" class="input" id="output-amount" min="0" required>
+				<label for="output-amount" class="fieldname">Total amount (ml)</label>
+				<label class="tip">Enter the desired amount of liquid in ml.</label>
 			</div>
 			<h5 class="header">PG/VG ratio</h5>
 			<p class="tip">Adjust the slider to the preferred final PG / VG ratio for your recipe.</p>
@@ -36,8 +36,8 @@
 					<option value="100">
 				</datalist>
 				<div class="selected-value">
-					<span class="pg-value"></span>
-					<span class="vg-value"></span>
+					<span><span class="pg-value"></span>% PG</span>
+					<span><span class="vg-value"></span>% VG</span>
 				</div>
 			</div>
 			
@@ -45,17 +45,17 @@
 				<div class="closed-group">
 					<div class="group-header inactive diluent">
 						<i class="material-icons">add_circle_outline</i>
-						<p>Diluent</p>
+						<p class="group-name">Diluent</p>
 					</div>
 					<div class="opened-group input-group">
-						<input type="number" class="input" name="diluent" min="0" required>
+						<input type="number" class="input" id="diluent" min="0">
 						<label for="diluent" class="fieldname">Total amount (ml)</label>
 					</div>
 				</div>
 				<div class="closed-group">
 					<div class="group-header inactive nicotine">
 						<i class="material-icons">add_circle_outline</i>
-						<p>Nicotine</p>
+						<p class="group-name">Nicotine</p>
 					</div>
 					<div class="opened-group">
 						<p class="tip">If you want to add nicotine, set up the details of the nicotine base that you have.</p>
@@ -70,20 +70,20 @@
 								<option value="100">
 							</datalist>
 							<div class="selected-value">
-								<span class="pg-value"></span>
-								<span class="vg-value"></span>
+								<span><span class="pg-value"></span>% PG</span>
+								<span><span class="vg-value"></span>% VG</span>
 							</div>
 						</div>
 						
 						<div class="input-group">
 							<input type="number" class="input" id="base-strenght" min="0" required>
 							<label for="base-strenght" class="fieldname">Base strenght (mg)</label>
-							<p class="tip">Enter the nicotine base strenght in mg.</p>
+							<label class="tip">Enter the nicotine base strenght in mg.</label>
 						</div>
 						<div class="input-group">
-							<input type="number" class="input" id="nicotine-output" min="0" required>
-							<label for="nicotine-output" class="fieldname">Desired nicotine strenght</label>
-							<p class="tip">Specify the strength of the liquid you want to make.</p>
+							<input type="number" class="input" id="output-nicotine" min="0" required>
+							<label for="output-nicotine" class="fieldname">Desired nicotine strenght</label>
+							<label class="tip">Specify the strength of the liquid you want to make.</label>
 						</div>
 					</div>
 				</div>
@@ -96,12 +96,12 @@
 				<div class="flavours-list">
 					<div class="flavour-field">
 						<i class="material-icons remove-flavour">remove_circle_outline</i>
-						<input type="text" class="input flavour-name" placeholder="Flavour #1">
-						<input type="number" class="input flavour-amount ml" value="0" min="0" max="100">
+						<input type="text" class="input flavour-name" id="flavour_1" placeholder="Flavour #1">
+						<input type="number" class="input flavour-amount ml" id="flavour_1_amount" value="0" min="0" max="100">
 					</div>
 					<div class="add-flavour">
 						<i class="material-icons">add_circle_outline</i>
-						<p>Add flavour</p>
+						<p class="group-name">Add flavour</p>
 					</div>
 				</div>
 			</div>
@@ -113,9 +113,9 @@
 		
 		<div class="result">
 			<div class="recipe-name">Default Name</div>
-			<span class="output-amount">100 ml</span>
+			<span><span class="output-amount">100</span> ml</span>
 			<strong>|</strong>
-			<span class="output-nicotine">3 mg</span>
+			<span><span class="output-nicotine">3</span> mg</span>
 			<div class="btn-container">
 				<input type="button" value="Save recipe" class="btn-save-recipe">
 				<input type="button" value="Share" class="btn-share">

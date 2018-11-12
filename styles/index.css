@@ -2,12 +2,7 @@
 
 html {
 	font: 18px "Nunito", "Open Sans", sans-serif;
-}
-
-p {
-	display: flex;
-	margin: 0 .89em;
-	font-weight: 600;
+	letter-spacing: .01em;
 }
 
 input[type="button"] {
@@ -36,13 +31,19 @@ input[type="button"] {
 }
 
 .tip {
+	display: inherit;
 	position: relative;
-	margin: auto;
-	margin-top: .5em;
+	top: -2em;
 	padding: .5em 1em;
 	font-size: .67em;
 	font-weight: 800;
 	color: #898989;
+}
+
+p.tip {
+	margin: auto;
+	margin-top: .5em;
+	top: 0;
 }
 
 .input-group {
@@ -114,19 +115,26 @@ input[type="button"] {
 }
 
 .closed-group {
-	display: flex;
-	flex-direction: column;
+	/* display: flex;
+	flex-direction: column; */
 	user-select: none;
 }
 
 .opened-group {
 	display: none;
 	flex-direction: column;
+	padding-top: 1em;
 }
 
 .group-header {
 	display: flex;
 	cursor: pointer;
+}
+
+.group-name {
+	display: flex;
+	margin: 0 .89em;
+	font-weight: 600;
 }
 
 .flavours {

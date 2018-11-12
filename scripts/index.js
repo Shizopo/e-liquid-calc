@@ -9,15 +9,17 @@ let rmFlavourBtn = document.getElementsByClassName("remove-flavour");
 let percentsTab = document.querySelector("#percents-tab");
 let mlTab = document.querySelector("#ml-tab");
 let flavourCounter = 1;
+let recipe = {};
 
 window.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < slider.length; i++) {
-        pg[i].innerHTML = "50% PG";
-        vg[i].innerHTML = "50% VG";
+        pg[i].innerHTML = "50";
+        vg[i].innerHTML = "50";
         slider[i].addEventListener("input", sliderVal);
     }
     for (let j = 0; j < inputs.length; j++) {
         inputs[j].addEventListener("focusout", fillCheck);
+        inputs[j].addEventListener('focusout', inputHandler);
     }
     nicotineGroup.addEventListener("click", openGroup);
     diluentGroup.addEventListener("click", openGroup);
@@ -27,19 +29,17 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function sliderVal() {
     let currentPosition = this.value;
-    pg = this.parentNode.querySelector(".pg-value");
-    vg = this.parentNode.querySelector(".vg-value");
-    pg.innerHTML = ((100 - currentPosition) + "% PG");
-    vg.innerHTML = (currentPosition + "% VG");
+    let currentPg = this.parentNode.querySelector(".pg-value");
+    let currentVg = this.parentNode.querySelector(".vg-value");
+    currentPg.innerHTML = (100 - currentPosition);
+    currentVg.innerHTML = (currentPosition);
 }
 
 function fillCheck() {
-    let target = this;
-    console.log(target);
-    if (target.value.trim() == '') {
-        target.classList.remove("filled");
+    if (this.value.trim() == '') {
+        this.classList.remove("filled");
     } else {
-        target.classList.add("filled");
+        this.classList.add("filled");
     }
 }
 
@@ -49,7 +49,7 @@ function openGroup() {
     toggleIcon.parentNode.classList.remove("inactive");
     toggleIcon.parentNode.classList.add("active");
     toggleIcon.innerHTML = "remove_circle_outline";
-    displayedItem.style.display = "flex";
+    displayedItem.style.display = "inherit";
     this.removeEventListener("click", openGroup);
     this.addEventListener("click", closeGroup);
 }
@@ -100,6 +100,8 @@ function addFlavour() {
 
     let newFlavourName = newFlavourField.querySelector(".flavour-name");
     newFlavourName.setAttribute("placeholder", `Flavour #${++flavourCounter}`);
+    newFlavourName.id = newFlavourName.getAttribute("placeholder").toLowerCase();
+    newFlavourName.addEventListener('focusout', inputHandler)
 
     for (i = 1; i < rmFlavourBtn.length; i++) {
         rmFlavourBtn[i].style.visibility = "visible";
@@ -109,4 +111,21 @@ function addFlavour() {
 
 function removeBtn() {
     this.parentNode.remove();
+}
+
+function inputHandler() {
+    recipe[this.id] = this.value;
+    writeResult();
+}
+
+// Write data to the result table
+
+function writeResult() {
+    let result = document.querySelector(".result");
+    for (const i in recipe) {
+        let target = result.querySelector("."+i);
+        if (recipe[i] != undefined && target != null) {
+            target.innerHTML = recipe[i];
+        }
+    }
 }
