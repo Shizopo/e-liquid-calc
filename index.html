@@ -27,7 +27,7 @@
 			<h5 class="header">PG/VG ratio</h5>
 			<p class="tip">Adjust the slider to the preferred final PG / VG ratio for your recipe.</p>
 			<div class="slider-group">
-				<input type="range" class="slider pgvgratio" min="0" max="100" value="50" step="5" list="tickmarks">
+				<input type="range" class="slider pgvgratio" id="output-vg" min="0" max="100" value="50" step="5" list="tickmarks">
 				<datalist id="tickmarks">
 					<option value="0">
 					<option value="30">
@@ -61,7 +61,7 @@
 						<p class="tip">If you want to add nicotine, set up the details of the nicotine base that you have.</p>
 						<h5 class="header">Base PG/VG ratio</h5>
 						<div class="slider-group">
-							<input type="range" class="slider pgvgratio" min="0" max="100" value="50" step="5" list="tickmarks">
+							<input type="range" class="slider pgvgratio" id="nicotine-vg" min="0" max="100" value="50" step="5" list="tickmarks">
 							<datalist id="tickmarks">
 								<option value="0">
 								<option value="30">
@@ -96,7 +96,7 @@
 				<div class="flavours-list">
 					<div class="flavour-field">
 						<i class="material-icons remove-flavour">remove_circle_outline</i>
-						<input type="text" class="input flavour-name" id="flavour_1" placeholder="Flavour #1">
+						<input type="text" class="input flavour-name" id="flavour_1" placeholder="Flavour 1">
 						<input type="number" class="input flavour-amount ml" id="flavour_1_amount" value="0" min="0" max="100">
 					</div>
 					<div class="add-flavour">
@@ -125,17 +125,17 @@
 				<div class="grid-item grid-amount-percents">%</div>
 				<div class="grid-item">ml</div>
 				<div class="grid-item grid-row-name">PG</div>
-				<div class="grid-item grid-amount-percents" id="pg-res-percents">28</div>
+				<div class="grid-item grid-amount-percents output-pg">28</div>
 				<div class="grid-item">28</div>
 				<div class="grid-item grid-row-name">VG</div>
-				<div class="grid-item grid-amount-percents" id="vg-res-percents">75</div>
+				<div class="grid-item grid-amount-percents output-vg">75</div>
 				<div class="grid-item">75</div>
 				<div class="grid-item grid-row-name">Nicotine</div>
-				<div class="grid-item grid-amount-percents">13</div>
-				<div class="grid-item">13</div>
-				<div class="grid-item grid-row-name">Flavour</div>
-				<div class="grid-item grid-amount-percents">0.5</div>
-				<div class="grid-item">0.5</div>
+				<div class="grid-item grid-amount-percents base-amount-percents">13</div>
+				<div class="grid-item base-amount-ml">13</div>
+				<div class="grid-item grid-row-name flavour_1">Flavour 1</div>
+				<div class="grid-item grid-amount-percents flavour_1_amount_percents">0.5</div>
+				<div class="grid-item flavour_1_amount">0.5</div>
 			</div>
 		</div>
 	</div>

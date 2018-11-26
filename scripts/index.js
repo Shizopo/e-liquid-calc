@@ -10,12 +10,14 @@ let percentsTab = document.querySelector("#percents-tab");
 let mlTab = document.querySelector("#ml-tab");
 let flavourCounter = 1;
 let recipe = {};
+let totalAmount = null;
 
 window.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < slider.length; i++) {
         pg[i].innerHTML = "50";
         vg[i].innerHTML = "50";
-        slider[i].addEventListener("input", sliderVal);
+        slider[i].addEventListener("input", getSliderVal);
+        slider[i].addEventListener("input", inputHandler);
     }
     for (let j = 0; j < inputs.length; j++) {
         inputs[j].addEventListener("focusout", fillCheck);
@@ -27,12 +29,11 @@ window.addEventListener("DOMContentLoaded", () => {
     addFlavourBtn.addEventListener("click", addFlavour);
 });
 
-function sliderVal() {
-    let currentPosition = this.value;
+function getSliderVal() {
     let currentPg = this.parentNode.querySelector(".pg-value");
     let currentVg = this.parentNode.querySelector(".vg-value");
-    currentPg.innerHTML = (100 - currentPosition);
-    currentVg.innerHTML = (currentPosition);
+    currentPg.innerHTML = (100 - this.value);
+    currentVg.innerHTML = this.value;
 }
 
 function fillCheck() {
@@ -41,6 +42,17 @@ function fillCheck() {
     } else {
         this.classList.add("filled");
     }
+}
+
+function inputHandler() {
+    recipe[this.id] = this.value;
+    if (this.id === "output-vg") {
+        recipe["output-pg"] = 100 - this.value;
+    } else if (this.id === "nicotine-vg") {
+        recipe["nicotine-pg"] = 100 - this.value;
+    }
+    writeResult();
+    calculateNicBase();
 }
 
 function openGroup() {
@@ -96,36 +108,76 @@ function addFlavour() {
     let origFlavourField = document.querySelectorAll(".flavour-field");
     let flavoursList = document.querySelector(".flavours-list");
     let newFlavourField = origFlavourField[origFlavourField.length-1].cloneNode(true);
-    flavoursList.insertBefore(newFlavourField, addFlavourBtn);
+    flavoursList.insertBefore(newFlavourField, addFlavourBtn);  // insert cloned input
 
     let newFlavourName = newFlavourField.querySelector(".flavour-name");
-    newFlavourName.setAttribute("placeholder", `Flavour #${++flavourCounter}`);
-    newFlavourName.id = newFlavourName.getAttribute("placeholder").toLowerCase();
-    newFlavourName.addEventListener('focusout', inputHandler)
+    let newFlavourAmount = newFlavourField.querySelector(".flavour-amount");
+    newFlavourName.value = "";  // clean cloned input
+    newFlavourName.setAttribute("placeholder", `Flavour ${++flavourCounter}`);
+    newFlavourName.setAttribute("id", `flavour_${flavourCounter}`);
+    newFlavourAmount.setAttribute("id", `flavour_${flavourCounter}_amount`);
 
     for (i = 1; i < rmFlavourBtn.length; i++) {
         rmFlavourBtn[i].style.visibility = "visible";
         rmFlavourBtn[i].addEventListener("click", removeBtn);
     }
+    newFlavourName.addEventListener("focusout", inputHandler);
+    newFlavourAmount.addEventListener("focusout", inputHandler);
+    addFlavourResult(newFlavourName.placeholder, newFlavourAmount.value);
 }
 
 function removeBtn() {
     this.parentNode.remove();
 }
 
-function inputHandler() {
-    recipe[this.id] = this.value;
-    writeResult();
+function addFlavourResult(name, amount) {
+    let resultTable = document.querySelector(".result-grid-table");
+    let flavourName = document.createElement("div");
+    let flavourAmount = document.createElement("div");
+    let flavourAmountPercents = document.createElement("div");
+    flavourName.classList.add("grid-item", "grid-row-name", `flavour_${flavourCounter}`);
+    flavourAmountPercents.classList.add("grid-item", "grid-amount-percents", `flavour_${flavourCounter}_amount_percents`);
+    flavourAmount.classList.add("grid-item", `flavour_${flavourCounter}_amount`);
+    flavourName.innerHTML = name;
+    flavourAmountPercents.innerHTML = (toPercents(amount) ? toPercents(amount) : 0);
+    flavourAmount.innerHTML = amount;
+    
+    let flavour = [flavourName, flavourAmountPercents, flavourAmount];
+    for (let i = 0; i < flavour.length; i++) {
+        resultTable.appendChild(flavour[i]);
+    }
 }
 
 // Write data to the result table
 
 function writeResult() {
-    let result = document.querySelector(".result");
+    let resultTable = document.querySelector(".result");
     for (const i in recipe) {
-        let target = result.querySelector("."+i);
-        if (recipe[i] != undefined && target != null) {
+        let target = resultTable.querySelector("." + i);
+        if (i in recipe && recipe[i] != "" && target != null) {
             target.innerHTML = recipe[i];
         }
     }
+    console.log(recipe);
+}
+
+// Calculate nicotine base amount
+
+function calculateNicBase() {
+    // (Kf*Vf)/Kb=Vb
+    let baseNic = parseInt(recipe["base-strenght"]);
+    let finalNic = parseInt(recipe["output-nicotine"]);
+    let baseAmount = null;
+    totalAmount = parseInt(recipe["output-amount"]);
+    if (finalNic && baseNic && totalAmount) {
+        baseAmount = (finalNic * totalAmount) / baseNic;
+        recipe["base-amount-ml"] = parseInt(baseAmount);
+        recipe["base-amount-percents"] = toPercents(baseAmount);
+        writeResult();
+    }
+}
+
+function toPercents(target) {
+    let result = parseInt(target * 100 / totalAmount);
+    return result;
 }
