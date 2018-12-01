@@ -9,8 +9,14 @@ let rmFlavourBtn = document.getElementsByClassName("remove-flavour");
 let percentsTab = document.querySelector("#percents-tab");
 let mlTab = document.querySelector("#ml-tab");
 let flavourCounter = 1;
-let recipe = {};
-let totalAmount = null;
+let recipe = {
+    "output-amount": 0,
+    "output-pg": 50,
+    "output-vg": 50,
+    "nicotine-vg": 0,
+    "nicotine-pg": 0,
+};
+let totalAmount = recipe["output-amount"];
 
 window.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < slider.length; i++) {
@@ -53,6 +59,7 @@ function inputHandler() {
     }
     writeResult();
     calculateNicBase();
+    calculateRecipe()
 }
 
 function openGroup() {
@@ -116,6 +123,7 @@ function addFlavour() {
     newFlavourName.setAttribute("placeholder", `Flavour ${++flavourCounter}`);
     newFlavourName.setAttribute("id", `flavour_${flavourCounter}`);
     newFlavourAmount.setAttribute("id", `flavour_${flavourCounter}_amount`);
+    newFlavourAmount.value = "0";
 
     for (i = 1; i < rmFlavourBtn.length; i++) {
         rmFlavourBtn[i].style.visibility = "visible";
@@ -148,23 +156,8 @@ function addFlavourResult(name, amount) {
     }
 }
 
-// Write data to the result table
-
-function writeResult() {
-    let resultTable = document.querySelector(".result");
-    for (const i in recipe) {
-        let target = resultTable.querySelector("." + i);
-        if (i in recipe && recipe[i] != "" && target != null) {
-            target.innerHTML = recipe[i];
-        }
-    }
-    console.log(recipe);
-}
-
 // Calculate nicotine base amount
-
 function calculateNicBase() {
-    // (Kf*Vf)/Kb=Vb
     let baseNic = parseInt(recipe["base-strenght"]);
     let finalNic = parseInt(recipe["output-nicotine"]);
     let baseAmount = null;
@@ -177,7 +170,57 @@ function calculateNicBase() {
     }
 }
 
+function calculateRecipe() {
+    let baseAmount = recipe["base-amount-ml"];
+    let outputPgPercents = recipe["output-pg"];
+    let outputVgPercents = recipe["output-vg"];
+    let nicotinePgPercents = recipe["nicotine-pg"];
+    let nicotineVgPercents = recipe["nicotine-vg"];
+    let flavours = null;
+    
+    // Calculate required amount of PG and VG
+    let outputPg = parseInt(outputPgPercents * (totalAmount / 100));
+    let outputVg = parseInt(outputVgPercents * (totalAmount / 100));
+
+    // Get overall volume of the flavours
+    for (let i = 1; (recipe[`flavour_${i}_amount`]); i++) {
+        flavours += (parseInt(recipe[`flavour_${i}_amount`]));
+    }
+
+    if (baseAmount) {
+        // Calculate content of PG and VG in the base liquid
+        let nicotinePg = parseInt((baseAmount / 100) * nicotinePgPercents + flavours);
+        let nicotineVg = parseInt((baseAmount / 100) * nicotineVgPercents);
+
+        // Calculate how much of additional PG and VG required
+        let requiredPg = parseInt(outputPg - nicotinePg);
+        let requiredVg = parseInt(outputVg - nicotineVg);
+        
+        recipe["required-pg-ml"] = requiredPg;
+        recipe["required-vg-ml"] = requiredVg;
+        recipe["required-pg"] = toPercents(requiredPg);
+        recipe["required-vg"] = toPercents(requiredVg);
+    } else {
+        recipe["required-pg-ml"] = outputPg;
+        recipe["required-vg-ml"] = outputVg;
+        recipe["required-pg"] = toPercents(outputPg);
+        recipe["required-vg"] = toPercents(outputVg);
+    }
+    writeResult();
+}
+
+// Write data to the result table
+function writeResult() {
+    let resultTable = document.querySelector(".result");
+    for (const i in recipe) {
+        let target = resultTable.querySelector("." + i);
+        if (i in recipe && recipe[i] != "" && target != null) {
+            target.innerHTML = recipe[i];
+        }
+    }
+}
+
 function toPercents(target) {
     let result = parseInt(target * 100 / totalAmount);
-    return result;
+    return (!isNaN(result)) ? result : 0;
 }
