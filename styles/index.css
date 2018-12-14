@@ -146,6 +146,7 @@ p.tip {
 	display: flex;
 	height: 2.67em;
 	background-color: #FFFFFF;
+	text-align: center;
 	padding: 0;
 	margin: 0;
 	user-select: none;
@@ -156,6 +157,17 @@ p.tip {
 	display: flex;
 	width: 50%;
 	align-items: center;
+	color: #828282;
+}
+
+#percents-tab {
+	justify-content: flex-start;
+	padding-left: .89em;
+}
+
+#ml-tab {
+	justify-content: flex-end;
+	padding-right: .89em;
 }
 
 .tab:hover {
@@ -165,10 +177,8 @@ p.tip {
 .tab.selected {
 	width: 62.5%;
 	background-color: #E0E0E0;
-}
-
-#ml-tab {
-	justify-content: flex-end;
+	color: #000000;
+	font-weight: 600;
 }
 
 .flavours-list {
@@ -214,24 +224,10 @@ p.tip {
 
 .add-flavour {
 	display: flex;
-	align-items: center;
-	margin: 1.72em 0 .89em .89em;
+	margin: 1.67em 0 .89em .89em;
 	color: #000000;
 	user-select: none;
 	cursor: pointer;
-}
-
-.first {
-	visibility: hidden;
-}
-
-.btn-submit {
-	width: 100%;
-	height: 2.67em;
-	margin-top: 0.89em;
-	background-color: #000000;
-	color: #FFFFFF;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 #result {
@@ -252,6 +248,9 @@ p.tip {
 	width: 10.22em;
 	background-color: #000000;
 	color: #FFFFFF;
+	
+	/* Change it when buttons will be active */
+	display: none;
 }
 
 .btn-share {
@@ -260,6 +259,9 @@ p.tip {
 	border: .17em solid #000000 !important;
 	padding: 0;
 	margin-left: -.3em;
+
+	/* Change it when buttons will be active */
+	display: none;
 }
 
 .result-grid-table {

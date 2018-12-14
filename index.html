@@ -48,8 +48,8 @@
 						<p class="group-name">Diluent</p>
 					</div>
 					<div class="opened-group input-group">
-						<input type="number" class="input" id="diluent-amount-percents" min="0">
-						<label for="diluent" class="fieldname">Total amount (%)</label>
+						<input type="number" class="input" id="diluent-amount" min="0">
+						<label for="diluent-amount" class="fieldname">Total amount (%)</label>
 					</div>
 				</div>
 				<div class="closed-group">
@@ -90,14 +90,14 @@
 			</div>
 			<div class="flavours">
 				<div class="unit-switch">
-					<span id="percents-tab" class="tab"><p>%</p></span>
-					<span id="ml-tab" class="tab selected"><p>ml</p></span>
+					<span id="percents-tab" class="tab selected"><p>%</p></span>
+					<span id="ml-tab" class="tab"><p>ml</p></span>
 				</div>
 				<div class="flavours-list">
 					<div class="flavour-field">
 						<i class="material-icons remove-flavour">remove_circle_outline</i>
 						<input type="text" class="input flavour-name" id="flavour_1" placeholder="Flavour 1">
-						<input type="number" class="input flavour-amount ml" id="flavour_1_amount" value="0" min="0" max="100">
+						<input type="number" class="input flavour-amount percents" id="flavour_1_amount" value="0" min="0" max="100">
 					</div>
 					<div class="add-flavour">
 						<i class="material-icons">add_circle_outline</i>
@@ -108,7 +108,7 @@
 		</div>
 		
 		<div id="result">
-			<div class="recipe-name">Recipe Name</div>
+			<div class="recipe-name">Recipe name</div>
 			<span><span class="output-amount">30</span> ml</span>
 			<strong>|</strong>
 			<span><span class="output-nicotine">0</span> mg</span>
@@ -127,14 +127,14 @@
 				<div class="grid-item grid-amount-percents required-vg">50</div>
 				<div class="grid-item required-vg-ml">15</div>
 				<div class="grid-item grid-row-name diluent-table-row">Diluent</div>
-				<div class="grid-item grid-amount-percents diluent-amount-percents diluent-table-row">0</div>
+				<div class="grid-item grid-amount-percents diluent-amount diluent-table-row">0</div>
 				<div class="grid-item diluent-amount-ml diluent-table-row">0</div>
 				<div class="grid-item grid-row-name nicotine-table-row">Nicotine</div>
-				<div class="grid-item grid-amount-percents base-amount-percents nicotine-table-row">0</div>
+				<div class="grid-item grid-amount-percents base-amount nicotine-table-row">0</div>
 				<div class="grid-item base-amount-ml nicotine-table-row">0</div>
 				<div class="grid-item grid-row-name flavour_1">Flavour 1</div>
-				<div class="grid-item grid-amount-percents flavour_1_amount_percents">0</div>
-				<div class="grid-item flavour_1_amount">0</div>
+				<div class="grid-item grid-amount-percents flavour_1_amount">0</div>
+				<div class="grid-item flavour_1_amount_ml">0</div>
 			</div>
 		</div>
 	</div>
