@@ -240,7 +240,7 @@ function calculateNicBase() {
     totalAmount = recipe["output-amount"];
     if (finalNic && baseNic && totalAmount) {
         baseAmount = (finalNic * totalAmount) / baseNic;
-        recipe["base-amount-ml"] = parseInt(baseAmount, 10);
+        recipe["base-amount-ml"] = parseFloat(baseAmount).toFixed(1);
         recipe["base-amount"] = toPercents(baseAmount);
         writeResult();
     }
