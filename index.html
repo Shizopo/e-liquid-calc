@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 	<link rel="stylesheet" type="text/css" href="./styles/index.css">
-	<link href="https://fonts.googleapis.com/css?family=Nunito|Open+Sans" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Nunito%7COpen+Sans" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 	<link rel="shortcut icon" href="./favicon.ico">
@@ -12,7 +12,9 @@
 </head>
 
 <body>
-	<h5 class="header">E-liquid calculator</h5>
+	<header class="header">
+		<h1 class="main-heading">E-liquid calculator</h1>
+	</header>
 	<div class="container">
 		<div class="inputs">
 			<div class="input-group">
@@ -24,11 +26,11 @@
 				<label for="output-amount" class="fieldname">Total amount (ml)</label>
 				<label class="tip">Enter the desired amount of liquid in ml.</label>
 			</div>
-			<h5 class="header">PG/VG ratio</h5>
+			<h2 class="header heading">PG/VG ratio</h2>
 			<p class="tip">Adjust the slider to the preferred final PG / VG ratio for your recipe.</p>
 			<div class="slider-group">
-				<input type="range" class="slider pgvgratio" id="output-vg" min="0" max="100" value="50" step="5" list="tickmarks">
-				<datalist id="tickmarks">
+				<input type="range" class="slider pgvgratio" id="output-vg" min="0" max="100" value="50" step="5" list="output-slider-tickmarks">
+				<datalist id="output-slider-tickmarks">
 					<option value="0">
 					<option value="30">
 					<option value="50">
@@ -59,10 +61,10 @@
 					</div>
 					<div class="opened-group">
 						<p class="tip">If you want to add nicotine, set up the details of the nicotine base that you have.</p>
-						<h5 class="header">Base PG/VG ratio</h5>
+						<h2 class="header heading">Base PG/VG ratio</h2>
 						<div class="slider-group">
-							<input type="range" class="slider pgvgratio" id="nicotine-vg" min="0" max="100" value="50" step="5" list="tickmarks">
-							<datalist id="tickmarks">
+							<input type="range" class="slider pgvgratio" id="nicotine-vg" min="0" max="100" value="50" step="5" list="base-slider-tickmarks">
+							<datalist id="base-slider-tickmarks">
 								<option value="0">
 								<option value="30">
 								<option value="50">
@@ -90,8 +92,8 @@
 			</div>
 			<div class="flavours">
 				<div class="unit-switch">
-					<span id="percents-tab" class="tab selected"><p>%</p></span>
-					<span id="ml-tab" class="tab"><p>ml</p></span>
+					<span id="percents-tab" class="tab selected">%</span>
+					<span id="ml-tab" class="tab">ml</span>
 				</div>
 				<div class="flavours-list">
 					<div class="flavour-field">
@@ -122,19 +124,19 @@
 				<div class="grid-item">ml</div>
 				<div class="grid-item grid-row-name">PG</div>
 				<div class="grid-item grid-amount-percents required-pg">50</div>
-				<div class="grid-item required-pg-ml">15</div>
+				<div class="grid-item required-pg-ml">15.0</div>
 				<div class="grid-item grid-row-name">VG</div>
 				<div class="grid-item grid-amount-percents required-vg">50</div>
-				<div class="grid-item required-vg-ml">15</div>
+				<div class="grid-item required-vg-ml">15.0</div>
 				<div class="grid-item grid-row-name diluent-table-row">Diluent</div>
 				<div class="grid-item grid-amount-percents diluent-amount diluent-table-row">0</div>
-				<div class="grid-item diluent-amount-ml diluent-table-row">0</div>
+				<div class="grid-item diluent-amount-ml diluent-table-row">0.0</div>
 				<div class="grid-item grid-row-name nicotine-table-row">Nicotine</div>
 				<div class="grid-item grid-amount-percents base-amount nicotine-table-row">0</div>
-				<div class="grid-item base-amount-ml nicotine-table-row">0</div>
+				<div class="grid-item base-amount-ml nicotine-table-row">0.0</div>
 				<div class="grid-item grid-row-name flavour_1">Flavour 1</div>
 				<div class="grid-item grid-amount-percents flavour_1_amount">0</div>
-				<div class="grid-item flavour_1_amount_ml">0</div>
+				<div class="grid-item flavour_1_amount_ml">0.0</div>
 			</div>
 		</div>
 	</div>
